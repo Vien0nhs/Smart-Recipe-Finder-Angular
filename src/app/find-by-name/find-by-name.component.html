@@ -1,0 +1,39 @@
+<div class="find-by-name-container">
+  <h2>Find Recipes By Name</h2>
+  <form (ngSubmit)="searchRecipes()">
+    <input 
+      type="text" 
+      [(ngModel)]="recipeName" 
+      name="recipeName" 
+      placeholder="Enter recipe name (e.g., Canh bí đỏ)" />
+    <button type="submit" [disabled]="loading">{{ loading ? 'Searching...' : 'Search' }}</button>
+  </form>
+
+  <div class="results">
+    <div *ngIf="loading" class="loading">Loading...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="!loading && !error && recipes.length === 0" class="no-results">
+      No recipes found. Try a different name!
+    </div>
+    <div class="recipe-list" *ngIf="!loading && recipes.length > 0">
+      <div *ngFor="let recipe of recipes" class="recipe-card">
+        <img [src]="'http://localhost:8080' + recipe.image" [alt]="recipe.title" class="recipe-image">        
+        <h3>{{ recipe.title }}</h3>
+        <button (click)="viewDetails(recipe.id)" class="view-details">Start cooking</button>
+      </div>
+    </div>
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button 
+        [disabled]="currentPage === 1" 
+        (click)="loadRecipes(currentPage - 1)">
+        Previous
+      </button>
+      <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+      <button 
+        [disabled]="currentPage === totalPages" 
+        (click)="loadRecipes(currentPage + 1)">
+        Next
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="find-by-ingredients-container">
+    <h2>Find Recipes By Ingredients</h2>
+    <form (ngSubmit)="searchRecipes()">
+      <div class="input-group">
+        <input type="text" [(ngModel)]="ingredients[0]" name="ingredient1" placeholder="Ingredient 1 (e.g., thịt)" />
+        <input type="text" [(ngModel)]="ingredients[1]" name="ingredient2" placeholder="Ingredient 2 (e.g., trứng)" />
+        <input type="text" [(ngModel)]="ingredients[2]" name="ingredient3" placeholder="Ingredient 3" />
+        <input type="text" [(ngModel)]="ingredients[3]" name="ingredient4" placeholder="Ingredient 4" />
+        <input type="text" [(ngModel)]="ingredients[4]" name="ingredient5" placeholder="Ingredient 5" />
+      </div>
+      <button type="submit" [disabled]="loading">{{ loading ? 'Searching...' : 'Search' }}</button>
+    </form>
+  
+    <div class="results">
+      <div *ngIf="loading" class="loading">Loading...</div>
+      <div *ngIf="error" class="error">{{ error }}</div>
+      <div *ngIf="!loading && !error && recipes.length === 0" class="no-results">
+        No recipes found. Try different ingredients!
+      </div>
+      <div class="recipe-list" *ngIf="!loading && recipes.length > 0">
+        <div *ngFor="let recipe of recipes" class="recipe-card">
+          <img [src]="'http://localhost:8080' + recipe.image" [alt]="recipe.title" class="recipe-image">
+          <h3>{{ recipe.title }}</h3>
+          <button (click)="viewDetails(recipe.id)" class="view-details">Start cooking</button>
+        </div>
+      </div>
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button 
+          [disabled]="currentPage === 1" 
+          (click)="loadRecipes(currentPage - 1)">
+          Previous
+        </button>
+        <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+        <button 
+          [disabled]="currentPage === totalPages" 
+          (click)="loadRecipes(currentPage + 1)">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,32 @@
+<header>
+  <div class="header-container">
+    <a routerLink="/home"><h1>Smart Recipe Finder</h1></a>
+    <nav>
+      <a routerLink="/me" class="dropdown-toggle">
+        <i class="fas fa-user"></i>
+      </a>
+      <div class="dropdown">
+        <button class="dropdown-toggle">Finder</button>
+        <div class="dropdown-menu">
+
+          <button class="dropdown-button" (click)="navigateTo('/recipes')">All Recipes</button>
+          <button class="dropdown-button" (click)="navigateTo('find-by-ingredients')">Find By Ingredients</button>
+          <button class="dropdown-button" (click)="navigateTo('find-by-name')">Find By Name</button>
+          <button class="dropdown-button" (click)="navigateTo('find-by-type')">Find By Type</button>
+
+        </div>
+      </div>
+      <button class="dropdown-toggle" (click)="navigateTo('/history')">History</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <div class="footer-container">
+    <p>© 2025 Smart Recipe Finder. All rights reserved.</p>  
+  </div>
+</footer>

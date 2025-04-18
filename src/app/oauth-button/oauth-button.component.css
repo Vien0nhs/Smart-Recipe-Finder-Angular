@@ -1,0 +1,79 @@
+/* Container chính, căn giữa */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%; /* Đảm bảo không quá rộng trên màn hình nhỏ */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 2rem 0; /* Thêm margin trên/dưới để tạo khoảng cách với header/footer */
+  }
+  
+  /* Tiêu đề */
+  h2 {
+    color: #ff6347;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Text mô tả */
+  p {
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Nút Google Login */
+  .google-login-btn {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    gap: 8px;
+  }
+  
+  .google-login-btn img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+  
+  .google-login-btn:hover {
+    background-color: #ff6347;
+    color: white;
+  }
+  
+  /* Nút Logout */
+  .logout-btn {
+    background-color: #ff6347;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #e5533d;
+  }

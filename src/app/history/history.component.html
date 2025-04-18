@@ -1,0 +1,30 @@
+<div class="history-container">
+    <h2>Cooking History</h2>
+  
+    <div class="history-list">
+      <div *ngFor="let history of histories" class="history-card">
+        <img [src]="'http://localhost:8080' + history.recipeImage" [alt]="history.recipeTitle" class="history-image">
+        <h3>{{ history.recipeTitle }}</h3>
+        <div class="history-actions">
+          <button (click)="viewDetails(history.recipeId)" class="view-details">Start cooking</button>
+          <button (click)="deleteHistory(history.recipeId)" class="delete-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button 
+        [disabled]="currentPage === 1" 
+        (click)="loadHistory(currentPage - 1)">
+        Previous
+      </button>
+      <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+      <button 
+        [disabled]="currentPage === totalPages" 
+        (click)="loadHistory(currentPage + 1)">
+        Next
+      </button>
+    </div>
+  
+    <div class="notification" *ngIf="notification">{{ notification }}</div>
+  </div>

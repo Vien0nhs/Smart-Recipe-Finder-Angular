@@ -1,0 +1,91 @@
+<div class="recipe-detail-container" *ngIf="recipe; else notFound">
+  <div class="header-section">
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+  <h2 class="recipe-title">{{ recipe.title }}</h2>
+  <img [src]="getImageUrl(recipe.image)" [alt]="recipe.title" class="recipe-image">
+  <p><strong>Type:</strong> {{ recipe.recipeType }}</p>
+  <p><strong>Cooking Time:</strong> {{ recipe.cookingTime }} minutes</p>
+  <p><strong>Ingredients:</strong></p>
+  <ul>
+    <li *ngFor="let ingredient of recipe.ingredients">
+      {{ ingredient.name }} ({{ ingredient.quantity }})
+    </li>
+  </ul>
+  <p><strong>Spices:</strong></p>
+  <ul>
+    <li *ngFor="let spice of recipe.spices">
+      {{ spice.name }} ({{ spice.quantity }})
+    </li>
+  </ul>
+  <p><strong>Instructions:</strong></p>
+  <p class="recipe-instructions">{{ recipe.instructions }}</p>
+
+  <!-- Rating and Comment Container -->
+  <div class="rating-comment-container">
+    <div class="ratings-section">
+      <p><strong>Average Rating:</strong> {{ averageRating ? averageRating + '/5' : 'No ratings yet' }}</p>
+      <div class="star-rating">
+        <span *ngFor="let star of [1, 2, 3, 4, 5]"
+              class="star"
+              [class.active]="star <= selectedRating"
+              [class.disabled]="!isLoggedIn"
+              (click)="selectStar(star)">★</span>
+      </div>
+      <button *ngIf="isLoggedIn && selectedRating > 0"
+              class="submit-btn"
+              (click)="submitRating()">Submit</button>
+    </div>
+    <div class="comment-btn-wrapper">
+      <button class="comment-btn" (click)="toggleCommentBox()">Comment</button>
+      <button class="save-history-btn" (click)="saveToHistory()">Save to History</button>
+    </div>
+  </div>
+
+  <!-- Comments Frame -->
+  <div class="comments-frame">
+    <div class="comment-section">
+      <div class="comment-box" *ngIf="showCommentBox">
+        <div class="comment-input">
+          <textarea [(ngModel)]="comment" placeholder="Write your comment..."></textarea>
+          <button class="arrow-btn" *ngIf="!editingComment" (click)="submitComment()">
+            <img src="/assets/up-arrow.png" alt="Submit Comment">
+          </button>
+          <button class="save-btn" *ngIf="editingComment" (click)="submitComment()">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="comments-list" *ngIf="displayedComments.length > 0">
+      <div *ngFor="let comment of displayedComments"
+           class="comment-item"
+           [class.user-comment]="userEmail && comment.email === userEmail">
+        <p><strong>{{ comment.email }}:</strong> {{ comment.comment }}</p>
+        <div class="comment-actions" *ngIf="userEmail && comment.email === userEmail && userRating">
+          <button class="edit-btn" (click)="editComment(comment)">Edit</button>
+          <button class="delete-btn" (click)="confirmDelete()">Delete</button>
+        </div>
+      </div>
+    </div>
+    <button *ngIf="displayedComments.length < comments.length"
+            class="load-more-btn"
+            (click)="loadMoreComments()">View More</button>
+  </div>
+</div>
+
+<!-- Notification -->
+<div class="notification" *ngIf="notification">{{ notification }}</div>
+
+<ng-template #notFound>
+  <div class="not-found-container">
+    <p class="not-found-message">Recipe not found or you are not signed in to view this recipe.</p>
+    <button class="google-login-btn" (click)="signInWithGoogle()">
+      <svg width="20" height="20" viewBox="0 0 24 24" class="google-icon">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C4.01 20.61 7.77 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.77 1 4.01 3.39 2.18 7.07L5.84 9.91c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      Sign In with Google
+    </button>
+  </div>
+</ng-template>

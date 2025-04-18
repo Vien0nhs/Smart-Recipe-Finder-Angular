@@ -1,0 +1,177 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Header */
+  header {
+    background-color: #ff6347; /* Màu đỏ cà chua, liên quan đến ẩm thực */
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  /* Style cho thẻ <a> bao quanh <h1> */
+  .header-container > a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .header-container > a:hover {
+    text-decoration: none;
+  }
+  
+  h1 {
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8rem;
+  }
+  
+  nav a,
+.dropdown-toggle {
+  user-select: none;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-left: 0.5rem; /* <-- thêm dòng này để tạo khoảng cách giữa các nút */
+
+}
+.dropdown-toggle i {
+  font-size: 0.9em; /* Có thể điều chỉnh size */
+}
+  
+  /* Hover hiệu ứng giống pagination */
+nav a:hover,
+.dropdown-toggle:hover {
+  background-color: #ff6347;
+  color: white;
+}
+
+/* Xoá underline nếu có */
+nav a:visited,
+nav a:active {
+  text-decoration: none;
+}
+  
+  /* Main */
+  main {
+    min-height: 80vh; /* Đảm bảo nội dung có không gian */
+    background-color: #f5f5f5; /* Màu nền nhẹ nhàng */
+    flex: 1; /* Đẩy footer xuống dưới */
+  position: relative;
+  min-height: calc(100vh - 120px); /* Đảm bảo main đủ cao (trừ chiều cao header/footer) */
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #FAFAFA;
+    color: #ff6347;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; /* Đảm bảo footer nằm dưới cùng */
+  }
+  
+  p {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px; /* Tăng width để button vừa */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 10px; /* Thêm padding cho đẹp */
+    border-radius: 10px;
+  }
+  
+  .dropdown-button {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    width: 100%; /* Chiếm toàn bộ chiều rộng của dropdown */
+    text-align: left; /* Căn trái giống pagination */
+  }
+  
+  .dropdown-button:hover {
+    background-color: #ff6347;
+    color: white;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+/* ===== Mobile Styles ===== */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  nav {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    margin-top: 0.5rem;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+/* ===== Rất nhỏ (dưới 400px) ===== */
+@media (max-width: 400px) {
+  nav a, .dropdown-toggle {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .dropdown-toggle i {
+    margin-right: 5px;
+  }
+}
+
+/* ===== Hiệu ứng hover ===== */
+nav a:hover,
+.dropdown-toggle:hover,
+.dropdown-button:hover {
+  background-color: #ff6347;
+  color: white;
+}
