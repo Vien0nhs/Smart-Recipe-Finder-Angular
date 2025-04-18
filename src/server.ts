@@ -14,6 +14,16 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
+const prerenderParams = {
+  'recipes/:id': [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '4' },
+    { id: '5' }
+  ]
+};
+
 /**
  * Example Express Rest API endpoints can be defined here.
  * Uncomment and define endpoints as necessary.
@@ -41,6 +51,17 @@ app.use(
  * Handle all other requests by rendering the Angular application.
  */
 app.use('/**', (req, res, next) => {
+
+  let params = {};
+
+  // Kiểm tra route động recipes/:id
+  if (req.url.startsWith('/recipes/')) {
+    const id = req.url.split('/recipes/')[1].split('/')[0];
+    if (prerenderParams['recipes/:id'].some(p => p.id === id)) {
+      params = { id };
+    }
+  }
+
   angularApp
     .handle(req)
     .then((response) =>

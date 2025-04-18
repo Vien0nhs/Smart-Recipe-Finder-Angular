@@ -11,7 +11,23 @@ import { HistoryComponent } from './history/history.component';
 export const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'recipes', component: RecipesComponent},
-    {path: 'recipes/:id', component: RecipeDetailComponent},
+    {
+        path: 'recipes/:id', 
+        component: RecipeDetailComponent,
+        data: {
+            prerender: {
+              getPrerenderParams: () => {
+                return [
+                  { id: '1' },
+                  { id: '2' },
+                  { id: '3' },
+                  { id: '4' },
+                  { id: '5' },
+                ];
+              },
+            }
+          }
+    },
     {path: 'find-by-ingredients', component: FindByIngredientsComponent},
     {path: 'find-by-name', component: FindByNameComponent},
     {path: 'me', component: OAuthButtonComponent},
